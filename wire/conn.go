@@ -3,15 +3,16 @@ package wire
 import "github.com/zach-klippenstein/goadb/internal/errors"
 
 const (
-	// The official implementation of adb imposes an undocumented 255-byte limit
+	// The official implementation of adb imposes an undocumented 5-megabyte limit
 	// on messages.
-	MaxMessageLength = 255
+	MaxPayloadSize = 1024 * 1024
 )
 
 /*
 Conn is a normal connection to an adb server.
 
 For most cases, usage looks something like:
+
 	conn := wire.Dial()
 	conn.SendMessage(data)
 	conn.ReadStatus() == StatusSuccess || StatusFailure
